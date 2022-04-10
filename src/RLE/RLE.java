@@ -2,28 +2,28 @@ package RLE;
 
 public class RLE {
     public static void main(String[] args) {
-        System.out.println(transformation("11111110010000000000000000000011111111111"));
+        System.out.println(transformation("11010"));
         //System.out.println(encoding(7));
     }
 
     public static String transformation(String S) {
         String res = "";
         int len = S.length();
-        int count = 0;
-
-        if(S.charAt(0)=='1'){
-            res+="1";
+        int flag = 0;
+        if (S.charAt(0) == '1') {
+            res += "1";
+        } else {
+            res += "0";
         }
 
         for (int i = 1; i < len; i++) {
-            if (S.charAt(i) == S.charAt(i - 1)) {
-                count++;
-            } else {
-                //getCount and do encoding here
-                //System.out.println("Before: "+res);
+            if (S.charAt(i) != S.charAt(i - 1) || i == len - 1) {
+                int count = i-flag;
+                if(i==len-1){
+                    count++;
+                }
                 res+=encoding(count);
-               // System.out.println("After: "+ res);
-                count = 0;
+                flag = i;
             }
         }
 

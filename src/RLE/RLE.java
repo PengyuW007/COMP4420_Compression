@@ -1,15 +1,21 @@
 package RLE;
 
+import java.util.*;
+
 public class RLE {
     public static void main(String[] args) {
-        System.out.println(transformation("11010"));
-        //System.out.println(encoding(7));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input:");
+        String S = scanner.next();
+
+
+        System.out.println(transformation(S));
     }
 
     public static String transformation(String S) {
         String res = "";
         int len = S.length();
-        int flag = 0;
+        int count = 1;
         if (S.charAt(0) == '1') {
             res += "1";
         } else {
@@ -17,13 +23,16 @@ public class RLE {
         }
 
         for (int i = 1; i < len; i++) {
-            if (S.charAt(i) != S.charAt(i - 1) || i == len - 1) {
-                int count = i-flag;
+            if(S.charAt(i)==S.charAt(i-1)){
+                count++;
                 if(i==len-1){
-                    count++;
+                    res+=encoding(count);
                 }
-                res+=encoding(count);
-                flag = i;
+            }else {
+                if(i!=len-1){
+                    res+=encoding(count);
+                }
+                count = 1;
             }
         }
 
@@ -37,6 +46,6 @@ public class RLE {
             bin = "0" + bin;
         }
         return bin;
-    }
+    }//end encoding
 
 }

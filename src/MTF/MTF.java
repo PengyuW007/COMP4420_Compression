@@ -11,7 +11,7 @@ public class MTF {
         //String S = "INEFFICIENCIES";
         ArrayList<String> res = mtf(S);
 
-        System.out.println("Your result: ");
+        System.out.println("\nYour result: ");
         System.out.println(res.toString());
 
     }

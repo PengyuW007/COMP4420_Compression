@@ -1,15 +1,20 @@
 package RLE;
 
+import java.text.NumberFormat;
 import java.util.*;
 
 public class RLE {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Input:");
+        System.out.println("Please type string here: ");
         String S = scanner.next();
 
+        System.out.println("\nYour result: ");
+        String res = transformation(S);
+        System.out.println(res);
+        System.out.println("\nCompression ratio: ");
 
-        System.out.println(transformation(S));
+        System.out.println(percentInstance(S.length(),res.length()));
     }
 
     public static String transformation(String S) {
@@ -23,14 +28,14 @@ public class RLE {
         }
 
         for (int i = 1; i < len; i++) {
-            if(S.charAt(i)==S.charAt(i-1)){
+            if (S.charAt(i) == S.charAt(i - 1)) {
                 count++;
-                if(i==len-1){
-                    res+=encoding(count);
+                if (i == len - 1) {
+                    res += encoding(count);
                 }
-            }else {
-                if(i!=len-1){
-                    res+=encoding(count);
+            } else {
+                if (i != len - 1) {
+                    res += encoding(count);
                 }
                 count = 1;
             }
@@ -48,4 +53,11 @@ public class RLE {
         return bin;
     }//end encoding
 
+    private static String percentInstance(int S, int res) {
+        double ratio = Double.valueOf(res) / Double.valueOf(S);
+        NumberFormat percent = NumberFormat.getPercentInstance();
+        percent.setMinimumFractionDigits(2);
+
+        return percent.format(ratio);
+    }
 }
